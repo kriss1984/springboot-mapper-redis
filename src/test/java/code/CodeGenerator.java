@@ -37,9 +37,9 @@ import freemarker.template.TemplateExceptionHandler;
  */
 public class CodeGenerator {
 	// JDBC配置，请修改为你项目的实际配置
-	private static final String JDBC_URL = "jdbc:mysql://47.92.97.192:3306/jzxxpt";
-	private static final String JDBC_USERNAME = "tys";
-	private static final String JDBC_PASSWORD = "tysTYS";
+	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/ykttest";
+	private static final String JDBC_USERNAME = "root";
+	private static final String JDBC_PASSWORD = "Benet520";
 	private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
 
 	private static final String PROJECT_PATH = System.getProperty("user.dir");// 项目在硬盘上的基础路径
@@ -48,7 +48,7 @@ public class CodeGenerator {
 	private static final String JAVA_PATH = "/src/main/java"; // java文件路径
 	private static final String RESOURCES_PATH = "/src/main/resources";// 资源文件路径
 
-	private static final String AUTHOR = "actor-T";// @author
+	private static final String AUTHOR = "kriss";// @author
 	private static final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());// @date
 
 	/**
@@ -58,7 +58,7 @@ public class CodeGenerator {
 	 */
 	public static void main(String[] args) {
 		List<TableMapper> tables = new ArrayList<>();
-		TableMapper MapperOne = new TableMapper("t_user", "User");
+		TableMapper MapperOne = new TableMapper("xm_parents", "WxParents");
 		// TableMapper MapperTwo = new TableMapper("sampling_rock", "");
 		// TableMapper MapperThree = new TableMapper("s_login_log", "LoginLog");
 		// TableMapper MapperFour = new TableMapper("sampling_water", "");
@@ -67,7 +67,7 @@ public class CodeGenerator {
 		// tables.add(MapperTwo);
 		// tables.add(MapperFour);
 		// tables.add(MapperFive);
-		genCode("user", tables);// 模块名、数据表名
+		genCode("wx.parents", tables);// 模块名、数据表名
 	}
 
 	/**

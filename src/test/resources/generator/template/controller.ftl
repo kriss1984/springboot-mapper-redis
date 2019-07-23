@@ -1,11 +1,11 @@
 package ${basePackage}.controller;
 import ${basePackage}.model.${modelNameUpperCamel};
 import ${basePackage}.service.I${modelNameUpperCamel}Service;
-import ${corePackage}.core.Result;
-import ${corePackage}.core.ResultGenerator;
-import ${corePackage}.core.redis.RedisUtil;
-import ${corePackage}.core.CorePager;
-import ${corePackage}.core.utils.CommonUtil;
+import com.open.boot.core.Result;
+import com.open.boot.core.ResultGenerator;
+import com.open.boot.core.redis.RedisUtil;
+import com.open.boot.core.CorePager;
+import com.open.boot.core.utils.CommonUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.util.StringUtil;
