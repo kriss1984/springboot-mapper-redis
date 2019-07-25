@@ -58,8 +58,8 @@ public class CodeGenerator {
 	 */
 	public static void main(String[] args) {
 		List<TableMapper> tables = new ArrayList<>();
-		TableMapper MapperOne = new TableMapper("xm_parents", "WxParents");
-		// TableMapper MapperTwo = new TableMapper("sampling_rock", "");
+		TableMapper MapperOne = new TableMapper("xm_student_report", "StudentReport");
+		//TableMapper MapperTwo = new TableMapper("sampling_rock", "");
 		// TableMapper MapperThree = new TableMapper("s_login_log", "LoginLog");
 		// TableMapper MapperFour = new TableMapper("sampling_water", "");
 		// TableMapper MapperFive = new TableMapper("company", "");
@@ -67,7 +67,7 @@ public class CodeGenerator {
 		// tables.add(MapperTwo);
 		// tables.add(MapperFour);
 		// tables.add(MapperFive);
-		genCode("wx.parents", tables);// 模块名、数据表名
+		genCode("ht.student", tables);// 模块名、数据表名
 	}
 
 	/**

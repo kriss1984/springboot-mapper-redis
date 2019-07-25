@@ -1,6 +1,6 @@
-package ${basePackage}.controller;
-import ${basePackage}.model.${modelNameUpperCamel};
-import ${basePackage}.service.I${modelNameUpperCamel}Service;
+package com.open.boot.yw.ht.student.controller;
+import com.open.boot.yw.ht.student.model.StudentReport;
+import com.open.boot.yw.ht.student.service.IStudentReportService;
 import com.open.boot.core.Result;
 import com.open.boot.core.ResultGenerator;
 import com.open.boot.core.redis.RedisUtil;
@@ -20,64 +20,64 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 /**
-* Created by ${author} on ${date}.
+* Created by kriss on 2019/07/24.
 */
 @RestController
-@RequestMapping("${baseRequestMapping}")
-public class ${modelNameUpperCamel}Controller {
+@RequestMapping("/ht/student/report")
+public class StudentReportController {
     @Autowired
-    private I${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
+    private IStudentReportService studentReportService;
 	@Resource
 	RedisUtil RedisUtil;
 	
     @RequestMapping("/add")
-    public Result add(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.saveSelective(${modelNameLowerCamel});
-        return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
+    public Result add(@RequestBody StudentReport studentReport) {
+        studentReportService.saveSelective(studentReport);
+        return ResultGenerator.genSuccessResult(studentReport);
     }
 
     @RequestMapping("/delete")
     public Result delete(@RequestParam String id) {
-        ${modelNameLowerCamel}Service.deleteById(id);
+        studentReportService.deleteById(id);
         return ResultGenerator.genSuccessResult();
     }
 
     @RequestMapping("/updateSelective")
-    public Result update(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.updateSelective(${modelNameLowerCamel});
+    public Result update(@RequestBody StudentReport studentReport) {
+        studentReportService.updateSelective(studentReport);
         return ResultGenerator.genSuccessResult();
     }
     
     @RequestMapping("/updateAll")
-    public Result updateAll(@RequestBody ${modelNameUpperCamel} ${modelNameLowerCamel}) {
-        ${modelNameLowerCamel}Service.updateAll(${modelNameLowerCamel});
+    public Result updateAll(@RequestBody StudentReport studentReport) {
+        studentReportService.updateAll(studentReport);
         return ResultGenerator.genSuccessResult();
     }
 
     @RequestMapping("/detail")
     public Result detail(@RequestParam String id) {
-        ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.findById(id);
-        return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
+        StudentReport studentReport = studentReportService.findById(id);
+        return ResultGenerator.genSuccessResult(studentReport);
     }
 
     @RequestMapping("/listAll")
     public Result listAll(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
-        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findAll();
-        PageInfo<${modelNameUpperCamel}> pageInfo = new PageInfo<${modelNameUpperCamel}>(list);
+        List<StudentReport> list = studentReportService.findAll();
+        PageInfo<StudentReport> pageInfo = new PageInfo<StudentReport>(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }
     
 	@RequestMapping("/addList")
-	public Result addList(@RequestBody List<${modelNameUpperCamel}> list) {
-		int count = ${modelNameLowerCamel}Service.saveList(list);
+	public Result addList(@RequestBody List<StudentReport> list) {
+		int count = studentReportService.saveList(list);
 		return ResultGenerator.genSuccessResult(count);
 	}
 	
 	@RequestMapping("/updateList")
-	public Result updateList${modelNameUpperCamel}(@RequestBody List<${modelNameUpperCamel}> list) {
-		for (${modelNameUpperCamel} item : list) {
-			${modelNameLowerCamel}Service.updateSelective(item);
+	public Result updateListStudentReport(@RequestBody List<StudentReport> list) {
+		for (StudentReport item : list) {
+			studentReportService.updateSelective(item);
 		}
 		return ResultGenerator.genSuccessResult();
 	}
@@ -91,19 +91,19 @@ public class ${modelNameUpperCamel}Controller {
     @RequestMapping("/listByCondition")
 	public Result listByCondition(@RequestBody Map<String, Object> map) {
 		String pagerStr = CommonUtil.getMapValue(map, "pager");
-		${modelNameUpperCamel} objBean = JSON.parseObject(map.get("objBean").toString(), ${modelNameUpperCamel}.class);
+		StudentReport objBean = JSON.parseObject(map.get("objBean").toString(), StudentReport.class);
 		if (StringUtil.isEmpty(pagerStr)) {
-			Condition condition = new Condition(${modelNameUpperCamel}.class);
+			Condition condition = new Condition(StudentReport.class);
 			condition.createCriteria().andEqualTo(objBean);
-			List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findByCondition(condition);
+			List<StudentReport> list = studentReportService.findByCondition(condition);
 			return ResultGenerator.genSuccessResult(list);
 		} else {
 			CorePager pager = JSON.parseObject(pagerStr, CorePager.class);
 			PageHelper.startPage(pager.getPageNum(), pager.getPageSize());
-			Condition condition = new Condition(${modelNameUpperCamel}.class);
+			Condition condition = new Condition(StudentReport.class);
 			condition.createCriteria().andEqualTo(objBean);
-			List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.findByCondition(condition);
-			PageInfo<${modelNameUpperCamel}> pageInfo = new PageInfo<>(list);
+			List<StudentReport> list = studentReportService.findByCondition(condition);
+			PageInfo<StudentReport> pageInfo = new PageInfo<>(list);
 			return ResultGenerator.genSuccessResult(pageInfo);
 		}
 	}
@@ -116,11 +116,11 @@ public class ${modelNameUpperCamel}Controller {
 	 */
 	@RequestMapping("/updateByConditionSelective")
     public Result updateByConditionSelective(@RequestBody Map<String, Object> map) {
-        ${modelNameUpperCamel} objBean = JSON.parseObject(map.get("objBean").toString(), ${modelNameUpperCamel}.class);
-       	${modelNameUpperCamel} objCondition = JSON.parseObject(map.get("objCondition").toString(), ${modelNameUpperCamel}.class);
-       	Condition condition = new Condition(${modelNameUpperCamel}.class);
+        StudentReport objBean = JSON.parseObject(map.get("objBean").toString(), StudentReport.class);
+       	StudentReport objCondition = JSON.parseObject(map.get("objCondition").toString(), StudentReport.class);
+       	Condition condition = new Condition(StudentReport.class);
 		condition.createCriteria().andEqualTo(objCondition);
-		${modelNameLowerCamel}Service.updateByConditionSelective(objBean,objCondition);
+		studentReportService.updateByConditionSelective(objBean,objCondition);
         return ResultGenerator.genSuccessResult();
     }
 }
